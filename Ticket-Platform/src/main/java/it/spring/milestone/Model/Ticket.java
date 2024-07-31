@@ -32,19 +32,15 @@ public class Ticket {
 	private String stato;
 
 	@ManyToOne
-	@JoinColumn(name = "categoria_id", nullable = false)
+	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
-
-	@ManyToOne
-	@JoinColumn(name = "operatore_id", nullable = false)
-	private Operatore operatore;
-
-	@ManyToOne
-	@JoinColumn(name = "admin_id", nullable = false)
-	private Admin admin;
 
 	@OneToMany(mappedBy = "ticket")
 	private List<Note> note;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id", nullable = false)
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -76,6 +72,8 @@ public class Ticket {
 
 	public void setDataCreazione(LocalDate dataCreazione) {
 		this.dataCreazione = dataCreazione;
+
+		
 	}
 
 	public String getStato() {
@@ -94,14 +92,6 @@ public class Ticket {
 		this.categoria = categoria;
 	}
 
-	public Operatore getOperatore() {
-		return operatore;
-	}
-
-	public void setOperatore(Operatore operatore) {
-		this.operatore = operatore;
-	}
-
 	public List<Note> getNote() {
 		return note;
 	}
@@ -110,12 +100,12 @@ public class Ticket {
 		this.note = note;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }

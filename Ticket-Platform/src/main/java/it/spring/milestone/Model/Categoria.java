@@ -19,7 +19,7 @@ public class Categoria {
 	private Integer id;
 	
 	//TITOLO
-	@Column(name = "Titolo", nullable = false)
+	@Column(name = "Titolo")
 	private String titolo;
 	
 	@OneToMany(mappedBy = "categoria")
@@ -39,7 +39,7 @@ public class Categoria {
 	}
 
 	public void setTitolo(String titolo) {
-		this.titolo = titolo;
+		this.titolo = "soft";
 	}
 
 	public List<Ticket> getTicket() {

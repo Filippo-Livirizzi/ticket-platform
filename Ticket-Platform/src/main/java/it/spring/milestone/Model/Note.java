@@ -27,16 +27,12 @@ public class Note {
 	private LocalDate create;
 
 	@ManyToOne
-	@JoinColumn(name = "ticket_id", nullable = false)
+	@JoinColumn(name = "ticket_id")
 	private Ticket ticket;
-
+	
 	@ManyToOne
-	@JoinColumn(name = "admin_id", nullable = false)
-	private Admin admin;
-
-	@ManyToOne
-	@JoinColumn(name = "operatore_id", nullable = false)
-	private Operatore operatore;
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	public Integer getId() {
 		return id;
@@ -70,20 +66,13 @@ public class Note {
 		this.ticket = ticket;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public User getUser() {
+		return user;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Operatore getOperatore() {
-		return operatore;
-	}
-
-	public void setOperatore(Operatore operatore) {
-		this.operatore = operatore;
-	}
 
 }

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+	<title>CREATE</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Crea un nuovo ticket</h1>
+
+
+		<form id="ticketForm" th:object="${ticket}" th:action="@{/ticket/create}" method="post">
+
+			<label for="title"> Titolo ticket</label>
+			<input type="text" class="form-control" id="title" th:field="*{title}">
+
+			<label for="descrizione"> Descrizione</label>
+			<input type="text" class="form-control" id="descrizione" th:field="*{descrizione}">
+
+			<label for="dataCreazione"> Data di Creazione</label>
+			<input type="date" class="form-control" id="dataCreazione" th:field="*{dataCreazione}">
+
+			<label for="stato"> Stato del ticket</label>
+			<input type="text" class="form-control" id="stato" th:field="*{stato}">
+			<div>
+				<label for="categoria">Categoria</label>
+				<select class="form-control" id="categoria" th:field="*{categoria.id}">
+					<option th:each="categoria : ${categorias}" th:value="${categorias}" th:text="${categoria.titolo}" >
+					</option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary"> Invia </button>
+			<a class="btn btn-primary" th:href="@{/ticket}"> Torna alla lista </a>
+		</form>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>
