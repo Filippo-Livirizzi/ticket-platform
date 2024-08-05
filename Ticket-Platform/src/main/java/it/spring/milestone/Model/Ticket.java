@@ -1,6 +1,7 @@
 package it.spring.milestone.Model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -36,7 +37,7 @@ public class Ticket {
 	private Categoria categoria;
 
 	@OneToMany(mappedBy = "ticket")
-	private List<Note> note;
+	private List<Note> note = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)

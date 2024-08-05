@@ -15,26 +15,44 @@
 
 		<form id="ticketForm" th:object="${ticket}" th:action="@{/ticket/create}" method="post">
 
+			<label for="user">A quale operatore vuoi assegnare il ticket?</label>
+			<select class="form-control" id="user" th:field="*{user.id}" required>
+				<option th:each="user : ${user}" th:value="${user.id}" th:text="${user.username}">
+				</option>
+			</select>
+
 			<label for="title"> Titolo ticket</label>
-			<input type="text" class="form-control" id="title" th:field="*{title}">
+			<input type="text" class="form-control" id="title" th:field="*{title}" required>
 
-			<label for="descrizione"> Descrizione</label>
-			<input type="text" class="form-control" id="descrizione" th:field="*{descrizione}">
+				
+				<label for="descrizione"> Descrizione</label>
+				<input type="text" class="form-control" id="descrizione" th:field="*{descrizione}" required>
 
-			<label for="dataCreazione"> Data di Creazione</label>
-			<input type="date" class="form-control" id="dataCreazione" th:field="*{dataCreazione}">
+					
+					<label for="dataCreazione"> Data di Creazione</label>
+					<input type="date" class="form-control" id="dataCreazione" th:field="*{dataCreazione}" required>
 
-			<label for="stato"> Stato del ticket</label>
-			<input type="text" class="form-control" id="stato" th:field="*{stato}">
-			<div>
-				<label for="categoria">Categoria</label>
-				<select class="form-control" id="categoria" th:field="*{categoria.id}">
-					<option th:each="categoria : ${categorias}" th:value="${categorias}" th:text="${categoria.titolo}" >
-					</option>
-				</select>
-			</div>
-			<button type="submit" class="btn btn-primary"> Invia </button>
-			<a class="btn btn-primary" th:href="@{/ticket}"> Torna alla lista </a>
+						
+						<label for="stato"> Stato del ticket</label>
+						<input type="text" class="form-control" id="stato" th:field="*{stato}" required>
+						<div>
+							<label for="categoria">Categoria</label>
+							<select class="form-control" id="categoria" th:field="*{categoria.id}" required>
+								<option th:each="categoria : ${categorias}" th:value="${categorias}"
+									th:text="${categoria.titolo}">
+								</option>
+							</select>
+
+
+						<label for="Note">Note</label>
+						<div class="form-floating">
+							<textarea class="form-control" th:text="${note.testo}" id="Note"></textarea>
+						</div>
+						
+						<button type="submit" class="btn btn-primary"> Invia </button>
+
+						<a class="btn btn-primary" th:href="@{/ticket}"> Torna alla lista </a>
+
 		</form>
 	</div>
 

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Tickets</title>
+</head>
+<body>
+    <h1>Search Results for "<span th:text="${keyword}"></span>"</h1>
+
+    <form th:action="@{/ticket/search}" method="get">
+        <input type="text" name="keyword" placeholder="Search by title" />
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        <li th:each="ticket : ${tickets}">
+            <a th:href="@{|/ticket/show/${ticket.id}|}" th:text="${ticket.title}">Ticket Title</a>
+        </li>
+    </ul>
+
+    <a href="/ticket">Back to Tickets</a>
+</body>
+</html>
