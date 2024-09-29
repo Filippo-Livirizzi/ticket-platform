@@ -21,9 +21,9 @@ public class Note {
 
 	// TESTO - DATA DI CREAZIONE
 
-	@Column(name = "Testo", nullable = false)
+	@Column(name = "Testo")
 	private String testo;
-	@Column(name = "data di creazione", nullable = false)
+	@Column(name = "data di creazione")
 	private LocalDate create;
 
 	@ManyToOne

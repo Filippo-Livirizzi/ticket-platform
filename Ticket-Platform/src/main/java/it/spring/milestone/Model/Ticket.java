@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,8 +30,12 @@ public class Ticket {
 	@Column(name = "Descrizione", nullable = false)
 	private String descrizione;
 	@Column(name = "Data creazione", nullable = false)
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataCreazione;
-	@Column(name = "Stato", nullable = false)
+
+	//private StatoTick stato;
+
+	@Column(name = "Stato_ticket", nullable = false)
 	private String stato;
 
 	@ManyToOne
@@ -74,15 +80,6 @@ public class Ticket {
 	public void setDataCreazione(LocalDate dataCreazione) {
 		this.dataCreazione = dataCreazione;
 
-		
-	}
-
-	public String getStato() {
-		return stato;
-	}
-
-	public void setStato(String stato) {
-		this.stato = stato;
 	}
 
 	public Categoria getCategoria() {
@@ -108,5 +105,23 @@ public class Ticket {
 	public void setUser(User user) {
 		this.user = user;
 	}
+
+
+	public StatoTick getStato() {
+		switch(stato) {
+		case "Aperto":
+			return StatoTick.APERTO;
+		case "In corso":
+			return StatoTick.IN_CORSO;
+		case "chiuso":
+			return StatoTick.CHIUSO;
+        default:
+            throw new IllegalArgumentException("Stato sconosciuto: " + stato);
+		}
+	}
+
+	public void setStato(StatoTick stato) {
+		this.stato = stato.getValoreVisualizzazione();
+		}
 
 }

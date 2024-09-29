@@ -20,7 +20,7 @@
 
 	<nav class="navbar bg-dark border-bottom border-body">
 		<div class="container-fluid">
-			<a class="navbar-brand" th:href="@{/user}">
+			<a class="navbar-brand" th:href="@{/ticket/user}">
 				<img width="45" height="45" th:src="@{/img/Account_Circle.png} " alt="Icon_Account">
 			</a>
 			<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/search}" class="d-flex" method="get"

@@ -10,6 +10,7 @@ import it.spring.milestone.Model.Ticket;
 public interface TicketRepo extends JpaRepository<Ticket, Integer>{
 
 
+
 	List<Ticket> findByTitle(String title);
 	
 }

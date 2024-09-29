@@ -14,7 +14,7 @@ import it.spring.milestone.Model.User;
 public class DatabaseUserDetails implements UserDetails {
 	
 	private final Integer id;
-	private final String username;
+	protected final String username;
 	private final String password;
 	private final Set<GrantedAuthority> authorities;
 	

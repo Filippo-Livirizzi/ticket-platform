@@ -2,6 +2,8 @@ package it.spring.milestone.Model;
 
 import java.util.List;
 
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

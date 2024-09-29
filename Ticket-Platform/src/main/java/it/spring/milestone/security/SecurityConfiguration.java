@@ -26,6 +26,8 @@ public class SecurityConfiguration {
 		return http.build();
 	}
 
+	
+	
 	@Bean
 	DatabaseUserDetailsService userDetailsService() {
 		return new DatabaseUserDetailsService();

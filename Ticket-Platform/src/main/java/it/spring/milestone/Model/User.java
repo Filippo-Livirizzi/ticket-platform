@@ -3,7 +3,6 @@ package it.spring.milestone.Model;
 
 import java.util.List;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
@@ -16,22 +15,17 @@ public class User {
 	@Id
 	private Integer id;
 
-	
 	private String username;
 
 	private String email;
 
-	
 	private String password;
 
 	private Boolean disponibile;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles;
-	
-	@OneToMany(mappedBy = "user")
-	private List<Ticket> ticket;
-	
+
 	@OneToMany(mappedBy = "user")
 	private List<Note> note;
 
@@ -81,20 +75,9 @@ public class User {
 
 	public void setRoles(List<Role> roles) {
 		this.roles = roles;
-
-		if ("ADMIN".equals(this.roles)) {
-			this.disponibile = null;
-		}
-		;
+		
 	}
 
-	public List<Ticket> getTicket() {
-		return ticket;
-	}
-
-	public void setTicket(List<Ticket> ticket) {
-		this.ticket = ticket;
-	}
 
 	public List<Note> getNote() {
 		return note;
