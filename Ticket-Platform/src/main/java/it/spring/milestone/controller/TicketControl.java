@@ -7,13 +7,13 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.security.core.Authentication;
 
-import org.checkerframework.checker.units.qual.Current;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,7 +32,7 @@ import it.spring.milestone.repository.CategoriaRepository;
 import it.spring.milestone.repository.NoteRepository;
 import it.spring.milestone.repository.TicketRepo;
 import it.spring.milestone.repository.UserRepository;
-import it.spring.milestone.security.DatabaseUserDetails;
+
 import jakarta.validation.Valid;
 
 @Controller
@@ -50,8 +50,7 @@ public class TicketControl {
 
 	@Autowired
 	private NoteRepository noteRepo;
-	// List<StatoTick> stati = Arrays.asList(StatoTick.APERTO, StatoTick.CHIUSO,
-	// StatoTick.IN_CORSO);
+
 	Note note = new Note();
 
 	@GetMapping
@@ -108,7 +107,6 @@ public class TicketControl {
 
 		ticketForm.setDataCreazione(LocalDate.now());
 		ticketrepo.save(ticketForm);
-		// noteRepo.save(note);
 		return "redirect:/ticket";
 	}
 
@@ -200,17 +198,16 @@ public class TicketControl {
 
 	@GetMapping("/user")
 	public String getLoggedInUser(Model model) {
-		// Ottieni l'autenticazione attuale
+	
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		// Ottieni l'username dell'utente autenticato
+
 		String username = authentication.getName();
 
-		// Cerca l'utente nel database usando il repository
 		Optional<User> userOptional = userRepo.findByUsername(username);
 
 		if (userOptional.isPresent()) {
-			// Se l'utente è presente, passalo al modello
+			
 			User user = userOptional.get();
 			model.addAttribute("user", user);
 
@@ -218,7 +215,7 @@ public class TicketControl {
 			model.addAttribute("ticketUser", ticketUser);
 
 		} else {
-			// Gestisci il caso in cui l'utente non sia trovato
+
 			model.addAttribute("error", "Utente non trovato");
 		}
 
