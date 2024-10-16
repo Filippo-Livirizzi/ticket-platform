@@ -9,40 +9,59 @@
 
 <body>
 	<div class="container">
-		<h1>Dettagli Ticket</h1>
-
-
-		<h2>Operatore: <span th:text="${ticket.user.username}"></span></h2>
-
-		<h2 th:text="${ticket.title}"> </h2>
-		<h5>Descrizione: <span th:text="${ticket.descrizione}"></span></h5>
-
-		<h5>Stato: <span th:text="${ticket.stato}"></span></h5>
-		
-	
-	<h5>note: 
-		<div th:each="note : ${notes}"> 
-			<h5>Autore: <span th:text="${notes.user}"></span></h5>
-			<p>Data: <span th:text="${notes.create}"></span></p>
-			<p>Testo: <span th:text="${notes.testo}"></span></p>
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Dettagli Ticket</h1>
+			</div>
 		</div>
-	</h5>
-		<h5>Categoria: <span th:text="${ticket.categoria.titolo}"></span></h5>
+
+		<div class="row">
+			<div class="col-md-6">
+				<h2>Operatore: <span th:text="${ticket.user.username}"></span></h2>
+				<h2><span th:text="${ticket.title}"></span></h2>
+			</div>
+			<div class="col-md-6">
+				<h5>Stato: <span th:text="${ticket.stato}"></span></h5>
+				<h5>Categoria: <span th:text="${ticket.categoria.titolo}"></span></h5>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+				<h5>Descrizione:</h5>
+				<p th:text="${ticket.descrizione}"></p>
+			</div>
+		</div>
+
+		<div class="row" th:unless="${note.isEmpty}">
+			<div class="col-md-12">
+				<h5>Note:</h5>
+				<div th:each="note : ${note}">
+					<div class="card mb-3">
+						<div class="card-header">
+							Autore: <span th:text="${ticket.user.username}"></span>
+						</div>
+						<div class="card-body">
+							<p>Data: <span th:text="${note.create}"></span></p>
+							<p>Testo: <span th:text="${note.testo}"></span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 		<hr>
-
-		<!-- Sezione per aggiungere una nuova nota -->
-		<h3>Aggiungi una nota:</h3>
-		<form id="ticketForm" th:action="@{|/ticket/add/note/${ticket.id}|}" th:object="${newNote}" method="post">
-			<div class="mb-3">
-				<label for="testo" class="form-label">Testo della nota</label>
-				<textarea id="testo"   class="form-control"></textarea>
+		<div class="row">
+			<div class="col-md-12">
+				<a class="btn btn-primary" th:href="@{|/ticket|}">Torna alla lista dei Ticket</a>
 			</div>
 
-			<button type="submit" class="btn btn-primary">Aggiungi Nota</button>
-		</form>
+			</form>
+		</div>
 	</div>
 
+
+	</div>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"

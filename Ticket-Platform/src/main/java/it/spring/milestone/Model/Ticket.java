@@ -6,8 +6,11 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -33,16 +36,19 @@ public class Ticket {
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataCreazione;
 
-	//private StatoTick stato;
-
 	@Column(name = "Stato_ticket", nullable = false)
-	private String stato;
+	@Enumerated(EnumType.STRING) //il valore salvato nel db sarà una stringa di enum
+	private StatoTick stato;
+	
 
+	/*@Column(name = "Stato_ticket", nullable = false)
+	private String stato;
+*/
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
-	@OneToMany(mappedBy = "ticket")
+	@OneToMany(mappedBy = "ticket", cascade = CascadeType.REMOVE) //CASCADE: ELIMINDANDO UN TICKCET, LE NOTE ASSOCIATE VENGONO ELIMINATE
 	private List<Note> note = new ArrayList<>();
 
 	@ManyToOne
@@ -106,22 +112,14 @@ public class Ticket {
 		this.user = user;
 	}
 
-
 	public StatoTick getStato() {
-		switch(stato) {
-		case "Aperto":
-			return StatoTick.APERTO;
-		case "In corso":
-			return StatoTick.IN_CORSO;
-		case "chiuso":
-			return StatoTick.CHIUSO;
-        default:
-            throw new IllegalArgumentException("Stato sconosciuto: " + stato);
-		}
+		return stato;
 	}
 
 	public void setStato(StatoTick stato) {
-		this.stato = stato.getValoreVisualizzazione();
-		}
+		this.stato = stato;
+	}
+
+
 
 }

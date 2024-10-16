@@ -23,9 +23,8 @@
 			<a class="navbar-brand" th:href="@{/ticket/user}">
 				<img width="45" height="45" th:src="@{/img/Account_Circle.png} " alt="Icon_Account">
 			</a>
-			<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/search}" class="d-flex" method="get"
-				role="search">
-				<input name="search" type="search" placeholder="Search" required>
+			<form sec:authorize="hasAuthority('ADMIN')" th:action="@{/ticket/search}" class="d-flex" method="get">
+				<input name="title" type="search" placeholder="Search" required>
 				<button class="btn btn-outline-success" type="submit">Search</button>
 			</form>
 
@@ -71,18 +70,16 @@
 							</form>
 						</td>
 						<td>
-							<a th:href="@{|/ticket/add/note/${ticket.id}|}" class="btn btn-dark">Add note +</a>
+							<a th:href="@{|/ticket/note/${ticket.id}|}" class="btn btn-dark">Add note +</a>
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		<div th:if="${ticket.isEmpty()}">
-			<span>non ci sono ticket presenti </span>
-			<button class="btn btn-secondary"><a th:href="@{/ticket/create}" sec:authorize="hasAuthority('ADMIN')"> Crea
-					nuovo </a></button>
-
+			<span>non ci sono ticket presenti </span>	
 		</div>
+		<button class="btn btn-secondary"><a th:href="@{/ticket/create}" sec:authorize="hasAuthority('ADMIN')"> Crea nuovo </a></button>
 	</div>
 	<script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"></script>
 </body>
